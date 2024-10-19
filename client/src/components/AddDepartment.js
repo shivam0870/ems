@@ -4,10 +4,12 @@ import axios from 'axios';
 const AddDepartment = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-
+   const BACKEND_URI = "https://ems-tpe5.onrender.com";
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/api/departments', { name, description });
+        // await axios.post('http://localhost:5000/api/departments', { name, description });
+        await axios.post(`${BACKEND_URI}/api/departments`,  { name, description });
+
         setName('');
         setDescription('');
     };

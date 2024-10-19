@@ -6,10 +6,12 @@ const AddEmployee = () => {
     const [department, setDepartment] = useState('');
     const [address, setAddress] = useState('');
     const [departments, setDepartments] = useState([]);
+    const BACKEND_URI = "https://ems-tpe5.onrender.com";
 
     useEffect(() => {
         const fetchDepartments = async () => {
-            const res = await axios.get('http://localhost:5000/api/departments');
+            // const res = await axios.get('http://localhost:5000/api/departments');
+            const res = await axios.get(`${BACKEND_URI}/api/departments`);
             setDepartments(res.data);
         };
         fetchDepartments();
@@ -17,7 +19,8 @@ const AddEmployee = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/api/employees', { name, department, address });
+        // await axios.post('http://localhost:5000/api/employees', { name, department, address });
+        await axios.post(`${BACKEND_URI}/api/employees`, { name, department, address });
         setName('');
         setDepartment('');
         setAddress('');

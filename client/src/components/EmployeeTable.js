@@ -3,10 +3,11 @@ import axios from 'axios';
 
 const EmployeeTable = ({ filter }) => {
     const [employees, setEmployees] = useState([]);
-
+    const BACKEND_URI = "https://ems-tpe5.onrender.com";
     useEffect(() => {
         const fetchEmployees = async () => {
-            const res = await axios.get(`http://localhost:5000/api/employees?name=${filter.name}&department=${filter.department}`);
+            // const res = await axios.get(`http://localhost:5000/api/employees?name=${filter.name}&department=${filter.department}`);
+            const res = await axios.get(`${BACKEND_URI}/api/employees?name=${filter.name}&department=${filter.department}`);
             setEmployees(res.data);
         };
         fetchEmployees();
