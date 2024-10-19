@@ -13,6 +13,14 @@ const EmployeeTable = ({ filter }) => {
         fetchEmployees();
     }, [filter]);
 
+
+const filteredEmployee = employees.filter((e) => {
+    return (
+        (!filter.name  ||  e.name.toLowerCase().includes(filter.name.toLowerCase())) && (!filter.department ||e.department.toLowerCase().includes(filter.department.toLowerCase())) && (!filter.address || e.address.toLowerCase().includes(filter.address.toLowerCase()))
+    )
+})
+
+
     return (
         <table>
             <thead>
@@ -21,15 +29,27 @@ const EmployeeTable = ({ filter }) => {
                     <th>Name</th>
                     <th>Department</th>
                     <th>Address</th>
+                    <th>Pan Card</th>
                 </tr>
             </thead>
             <tbody>
-                {employees.map(emp => (
+                {filteredEmployee.map(emp => (
                     <tr key={emp._id}>
-                        <td>{emp._id}</td>
+                
                         <td>{emp.name}</td>
                         <td>{emp.department.name}</td>
                         <td>{emp.address}</td>
+                        <td>
+                            {
+                                emp.panCard ? ( 
+
+<a href={`${BACKEND_URI}/{emp.panCard}`} target='_blank' > PAN Card </a> 
+
+                                ) : (
+                                    'No pan card is present '
+                                )
+                            }
+                        </td>
                     </tr>
                 ))}
             </tbody>
